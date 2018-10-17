@@ -50,11 +50,6 @@ class RedisSubscriptionConsumer implements SubscriptionConsumer
                 $currentQueueNames = $queueNames;
             }
 
-            /**
-             * @var string
-             * @var Consumer $consumer
-             * @var callable $processor
-             */
             $result = $this->context->getRedis()->brpop($currentQueueNames, $timeout ?: 5);
             if ($result) {
                 $message = RedisMessage::jsonUnserialize($result->getMessage());
