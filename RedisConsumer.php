@@ -115,6 +115,15 @@ class RedisConsumer implements Consumer
         }
     }
 
+    /**
+     * Get number of tasks left
+     * @return int
+     */
+    public function getQueueLength(): int
+    {
+        return $this->getRedis()->llen($this->queue->getName());
+    }
+
     private function getContext(): RedisContext
     {
         return $this->context;
